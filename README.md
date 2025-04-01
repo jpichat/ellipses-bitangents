@@ -1,5 +1,5 @@
 # ellipses-bitangents
-Computes bitangents of 2 ellipses
+Compute bitangents of 2 (intersecting or non-intersecting) ellipses.
 
 <p align="center">
     <img src="img/fig1.png" alt="ellipses and bitangents" width="450" height="" />
