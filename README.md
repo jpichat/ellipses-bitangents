@@ -2,7 +2,7 @@
 Computes bitangents of 2 ellipses
 
 <p align="center">
-    <img src="img/fig1.png" alt="ellipses and bitangents" width="300" height="" />
+    <img src="img/fig1.png" alt="ellipses and bitangents" width="450" height="" />
 </p>
 
 ---
