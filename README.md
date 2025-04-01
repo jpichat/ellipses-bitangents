@@ -1,6 +1,10 @@
 # ellipses-bitangents
 Computes bitangents of 2 ellipses
 
+<p align="center">
+    <img src="img/fig1.png" alt="ellipses and bitangents" width="300" height="" />
+</p>
+
 ---
 
 
@@ -43,8 +47,4 @@ Run the example script in `src/`
 ```python
 python src/example.py
 ```
-using the coefficients defined in the file (and $a=c$ for the second ellipse, i.e. a circle), we get:
 
-<p align="center">
-    <img src="img/fig1.png" alt="ellipses and bitangents" />
-</p>
