@@ -12,7 +12,7 @@ Computes bitangents of 2 ellipses
       ellipse1 = Ellipse(EllipseParams(xc=2, yc=1, major_axis=7, minor_axis=2, angle=0))
       ellipse2 = Ellipse(EllipseParams(xc=-1, yc=7, major_axis=5, minor_axis=3, angle=0))
       ```
-   - Using quadratic coefficients
+   - Using conic coefficients
       ```python
      from entities import ConicCoeffs
      
@@ -43,9 +43,8 @@ Run the example script in `src/`
 ```python
 python src/example.py
 ```
-using the conic coefficients defined in the file (and $a=c$ for the second ellipse, i.e. a circle), we get:
+using the coefficients defined in the file (and $a=c$ for the second ellipse, i.e. a circle), we get:
 
 <p align="center">
-    <img src="img/fig1" />
+    <img src="img/fig1.png" alt="ellipses and bitangents" />
 </p>
-
