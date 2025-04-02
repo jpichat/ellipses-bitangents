@@ -1,4 +1,4 @@
-from typing import List, Tuple, Union
+from typing import List, Tuple
 import sympy
 import numpy as np
 from scipy.linalg import eig
