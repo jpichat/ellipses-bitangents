@@ -55,4 +55,4 @@ The solution relies on transforming the system of 2 polynomial equations to eith
 - a generalised eigenvalue problem (GEP)
 
 ## Known limits
-- the current code does not handle ellipse angles well yet ($theta \neq 0$ or $b \neq 0$)
+- the current code does not handle ellipse angles well yet ($\text{angle} \neq 0$ or $b \neq 0$)

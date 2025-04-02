@@ -8,9 +8,7 @@ import matplotlib.pyplot as plt
 from entities import Conic
 
 
-# plt.style.use("ggplot")
-plt.rcParams["axes.edgecolor"] = "black"
-plt.rcParams["axes.linewidth"] = 1
+plt.style.use("ggplot")
 
 
 class BitangentFinder:
@@ -151,13 +149,9 @@ class BitangentFinder:
         self._draw_conic(self.conic1)
         self._draw_conic(self.conic2)
         ax.set_aspect("equal")
-        plt.xlim(-8, 8)
-        plt.ylim(-8, 8)
+        plt.xlim(-10, 10)
+        plt.ylim(-10, 10)
         plt.tight_layout()
-        plt.xticks([], [])
-        plt.yticks([], [])
-        fig.subplots_adjust(0,0,1,1)
-        # ax.axis('off')
         plt.show()
 
     @staticmethod
