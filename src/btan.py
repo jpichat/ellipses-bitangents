@@ -1,59 +1,33 @@
 from typing import List, Tuple, Union
+import sympy
 import numpy as np
 from scipy.linalg import eig
+from numpy.linalg import svd
 import matplotlib.pyplot as plt
 
-from entities import EllipseParams, ConicCoeffs
+from entities import Conic
 
 
-plt.style.use("ggplot")
-
-
-class Ellipse:
-    def __init__(self, params: Union[EllipseParams, ConicCoeffs]):
-        if isinstance(params, ConicCoeffs):
-            self.conic_coeffs = params.tolist()
-        elif isinstance(params, EllipseParams):
-            self.conic_coeffs = self._to_conic(params).tolist()
-        else:
-            raise ValueError("Unknown parameter type.")
-        self.params = params
-
-    @staticmethod
-    def _to_conic(params: EllipseParams) -> ConicCoeffs:
-        """
-        ax^2 + bxy + cy^2 + dx + ey + f
-        """
-        theta = np.deg2rad(params.angle)
-        mja = params.major_axis / 2
-        mna = params.minor_axis / 2
-        cos_t = np.cos(theta)
-        sin_t = np.sin(theta)
-
-        A = (cos_t ** 2) / (mja ** 2) + (sin_t ** 2) / (mna ** 2)  # x^2
-        B = 2 * cos_t * sin_t * (1 / mja ** 2 - 1 / mna ** 2)  # xy
-        C = (sin_t ** 2) / mja ** 2 + (cos_t ** 2) / mna ** 2  # y^2
-        D = (-2 * A * params.xc) - (B * params.yc)  # x
-        E = (-B * params.xc) - (2 * C * params.yc)  # y
-        F = (A * params.xc ** 2) + (B * params.xc * params.yc) + (C * params.yc ** 2) - 1
-
-        return ConicCoeffs(a=A, b=B, c=C, d=D, e=E, f=F)
+# plt.style.use("ggplot")
+plt.rcParams["axes.edgecolor"] = "black"
+plt.rcParams["axes.linewidth"] = 1
 
 
 class BitangentFinder:
-    def __init__(self, ellipse1, ellipse2):
+    def __init__(self, conic1: Conic, conic2: Conic):
         """
         Finds bitangents of 2 ellipses
         """
-        self.ellipse1 = ellipse1
-        self.ellipse2 = ellipse2
+        self.conic1 = conic1
+        self.conic2 = conic2
 
     @staticmethod
-    def _poly_eq_coefs(ellipse_conic_coefs: List[float]):
+    def _poly_eq_coefs(conic_coefs: List[float]):
         """
         assuming coeffs follow the formalism: ax^2 + bxy + cy^2 + dx + ey + f
         """
-        a, b, c, d, e, f = ellipse_conic_coefs
+        assert len(conic_coefs) == 6
+        a, b, c, d, e, f = conic_coefs
 
         alpha1 = e ** 2 - 4 * c * f
         alpha2 = b ** 2 - 4 * a * c
@@ -65,12 +39,13 @@ class BitangentFinder:
         return alpha1, alpha2, alpha3, alpha4, alpha5, alpha6
 
     @classmethod
-    def _compute_bitangents_gep(cls, ellipse1, ellipse2):
+    def _gep(cls, conic1_coefs: List[float], conic2_coefs: List[float]):
         """
-        casts the system of 2 polynomial eqs into a GEP
+        transforms the system of 2 polynomial equations to a generalised eigenvalue problem
         """
-        a11, a12, a13, a14, a15, a16 = cls._poly_eq_coefs(ellipse1.conic_coeffs)
-        a21, a22, a23, a24, a25, a26 = cls._poly_eq_coefs(ellipse2.conic_coeffs)
+        assert len(conic1_coefs) == len(conic2_coefs) == 6
+        a11, a12, a13, a14, a15, a16 = cls._poly_eq_coefs(conic1_coefs)
+        a21, a22, a23, a24, a25, a26 = cls._poly_eq_coefs(conic2_coefs)
 
         C0 = np.array(
             [
@@ -104,52 +79,91 @@ class BitangentFinder:
 
         return w, vr
 
-    def compute_bitangents(self, method="gep"):
-        if method != "gep":
-            raise NotImplementedError("Only GEP method is supported")
+    @classmethod
+    def _pep(cls, conic1_coefs: List[float], conic2_coefs: List[float]):
+        """
+        transforms the system of 2 polynomial equations to a polynomial eigenvalue problem
+        """
+        a11, a12, a13, a14, a15, a16 = cls._poly_eq_coefs(conic1_coefs)
+        a21, a22, a23, a24, a25, a26 = cls._poly_eq_coefs(conic2_coefs)
 
-        eigenvals, eigenvecs = self._compute_bitangents_gep(self.ellipse1, self.ellipse2)
+        x = sympy.Symbol("x")
+        C = sympy.Matrix(
+            [
+                [a12, a13 * x + a15, a11 * x * x + a14 * x + a16, 0],
+                [0, a12, a13 * x + a15, a11 * x * x + a14 * x + a16],
+                [a22, a23 * x + a25, a21 * x * x + a24 * x + a26, 0],
+                [0, a22, a23 * x + a25, a21 * x * x + a24 * x + a26],
+            ]
+        )
+
+        # roots of determinant
+        roots = np.roots(C.det().as_poly().coeffs()).tolist()
+        U = [root for root in roots if np.isreal(root)]  # up to 4 real roots
+        assert len(U) <= 4, f"Expected 4 but found {len(U)} real roots"
+
+        # svd
+        Cx = sympy.lambdify(x, C, modules="numpy")
+        V = np.empty((4, 4))
+        for i, u_ in enumerate(U):
+            _, s, vh = svd(Cx(u_))
+            V[:, i] = vh[np.argmin(s), :]  # store v's as columns
+
+        return U, V
+
+    def compute_bitangents(self, method="gep"):
+        """
+        Computes bitangent lines equations
+        """
+
+        if method == "gep":
+            vals, vecs = self._gep(self.conic1.coefs, self.conic2.coefs)
+
+        elif method == "pep":
+            vals, vecs = self._pep(self.conic1.coefs, self.conic2.coefs)
+
+        else:
+            raise ValueError("Unknown method.")
 
         lines = []
-
-        for i, eigenval in enumerate(eigenvals):
-
-            if not np.isfinite(np.real(eigenval)) or not np.isreal(eigenval):
+        for i, value in enumerate(vals):
+            if not np.isfinite(np.real(value)) or not np.isreal(value):
                 continue
-
-            vi_ = eigenvecs[:, i]
+            vi_ = vecs[:, i]
             vi3 = np.real(vi_[2])
             vi4 = np.real(vi_[3])
-
             if vi4 == 0:
                 continue
-
-            lines.append((np.real(eigenval), -1, vi3 / vi4))  # tangent line: u*x - y + v = 0
+            lines.append((np.real(value), -1, vi3 / vi4))  # tangent line: u*x - y + v = 0
 
         return lines
 
     def draw(self, bitangents: List[Tuple[float, float, float]]):
         """
-        Draws the ellipses along with their bitangents
+        Draws the ellipses and their bitangents
         """
         fig, ax = plt.subplots()
-        self._draw_ellipse(self.ellipse1)
-        self._draw_ellipse(self.ellipse2)
         for line in bitangents:
             a, b, c = line
             x = np.array([-10, 10])
             y = (-a * x - c) / b
-            ax.plot(x, y, lw=1, c="r")
+            ax.plot(x, y, lw=3, c="orange")
+        self._draw_conic(self.conic1)
+        self._draw_conic(self.conic2)
         ax.set_aspect("equal")
-        plt.xlim(-10, 10)
-        plt.ylim(-10, 10)
+        plt.xlim(-8, 8)
+        plt.ylim(-8, 8)
         plt.tight_layout()
+        plt.xticks([], [])
+        plt.yticks([], [])
+        fig.subplots_adjust(0,0,1,1)
+        # ax.axis('off')
         plt.show()
 
     @staticmethod
-    def _draw_ellipse(shape: Ellipse):
-        a, b, c, d, e, f = shape.conic_coeffs
+    def _draw_conic(conic: Conic):
+        a, b, c, d, e, f = conic.coefs
         X, Y = np.meshgrid(np.linspace(-10, 10, 500), np.linspace(-10, 10, 500))
-        Z = (a * X ** 2) + (b * X * Y) + (c * Y ** 2) + (d * X) + (e * Y) + f
-        plt.contour(X, Y, Z, levels=[0], colors="blue")
+        Z = a * X ** 2 + b * X * Y + c * Y ** 2 + d * X + e * Y + f
+        plt.contour(X, Y, Z, levels=[0], colors="blue", linewidths=3, alpha=0.7)
         plt.gca().set_aspect("equal", "box")
