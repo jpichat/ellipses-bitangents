@@ -8,7 +8,13 @@ import matplotlib.pyplot as plt
 from entities import Conic
 
 
-plt.style.use("ggplot")
+PRETTY_PLOT = False
+
+if PRETTY_PLOT:
+    plt.rcParams["axes.edgecolor"] = "black"
+    plt.rcParams["axes.linewidth"] = 2
+else:
+    plt.style.use("ggplot")
 
 
 class BitangentFinder:
@@ -136,28 +142,36 @@ class BitangentFinder:
 
         return lines
 
-    def draw(self, bitangents: List[Tuple[float, float, float]]):
+    def draw(
+        self,
+        bitangents: List[Tuple[float, float, float]],
+        xlim: Tuple = (-10, 10),
+        ylim: Tuple = (-10, 10),
+    ):
         """
         Draws the ellipses and their bitangents
         """
         fig, ax = plt.subplots()
         for line in bitangents:
             a, b, c = line
-            x = np.array([-10, 10])
+            x = np.array(xlim)
             y = (-a * x - c) / b
-            ax.plot(x, y, lw=3, c="orange")
-        self._draw_conic(self.conic1)
+            ax.plot(x, y, lw=2, c="orange")
+        self._draw_conic(self.conic1, xlim=xlim, ylim=ylim)
         self._draw_conic(self.conic2)
         ax.set_aspect("equal")
-        plt.xlim(-10, 10)
-        plt.ylim(-10, 10)
-        plt.tight_layout()
+        plt.xlim(xlim)
+        plt.ylim(ylim)
+        if PRETTY_PLOT:
+            ax.set_xticks([])
+            ax.set_yticks([])
+            fig.subplots_adjust(0, 0, 1, 1)
         plt.show()
 
     @staticmethod
-    def _draw_conic(conic: Conic):
+    def _draw_conic(conic: Conic, xlim=(-10, 10), ylim=(-10, 10)):
         a, b, c, d, e, f = conic.coefs
-        X, Y = np.meshgrid(np.linspace(-10, 10, 500), np.linspace(-10, 10, 500))
+        X, Y = np.meshgrid(np.linspace(xlim[0], xlim[1], 500), np.linspace(ylim[0], ylim[1], 500))
         Z = a * X ** 2 + b * X * Y + c * Y ** 2 + d * X + e * Y + f
-        plt.contour(X, Y, Z, levels=[0], colors="blue", linewidths=3, alpha=0.7)
+        plt.contour(X, Y, Z, levels=[0], colors="blue", linewidths=2, alpha=0.8)
         plt.gca().set_aspect("equal", "box")

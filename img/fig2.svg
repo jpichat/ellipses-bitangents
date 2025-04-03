@@ -6,7 +6,7 @@
   <rdf:RDF xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:cc="http://creativecommons.org/ns#" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#">
    <cc:Work>
     <dc:type rdf:resource="http://purl.org/dc/dcmitype/StillImage"/>
-    <dc:date>2025-04-02T11:47:20.916475</dc:date>
+    <dc:date>2025-04-03T14:58:29.233790</dc:date>
     <dc:format>image/svg+xml</dc:format>
     <dc:creator>
      <cc:Agent>
@@ -42,12 +42,12 @@ z
    <g id="line2d_1">
     <path d="M -1 53.642344 
 L 461.8 153.686646 
-" clip-path="url(#pf730833e3b)" style="fill: none; stroke: #ffa500; stroke-width: 3; stroke-linecap: square"/>
+" clip-path="url(#p031bc82657)" style="fill: none; stroke: #ffa500; stroke-width: 5; stroke-linecap: square"/>
    </g>
    <g id="line2d_2">
     <path d="M 174.457624 346.6 
 L 434.812333 -1 
-" clip-path="url(#pf730833e3b)" style="fill: none; stroke: #ffa500; stroke-width: 3; stroke-linecap: square"/>
+" clip-path="url(#p031bc82657)" style="fill: none; stroke: #ffa500; stroke-width: 5; stroke-linecap: square"/>
    </g>
    <g id="QuadContourSet_1">
     <path d="M 272.449814 159.508532 
@@ -336,7 +336,7 @@ L 274.428629 159.624031
 L 273.439221 159.570793 
 L 272.449814 159.508532 
 z
-" clip-path="url(#pf730833e3b)" style="fill: none; stroke: #0000ff; stroke-opacity: 0.7; stroke-width: 3"/>
+" clip-path="url(#p031bc82657)" style="fill: none; stroke: #0000ff; stroke-opacity: 0.8; stroke-width: 5"/>
    </g>
    <g id="QuadContourSet_2">
     <path d="M 223.968852 246.610816 
@@ -443,32 +443,32 @@ L 227.926482 246.777651
 L 224.958259 246.690105 
 L 223.968852 246.610816 
 L 223.968852 246.610816 
-" clip-path="url(#pf730833e3b)" style="fill: none; stroke: #0000ff; stroke-opacity: 0.7; stroke-width: 3"/>
+" clip-path="url(#p031bc82657)" style="fill: none; stroke: #0000ff; stroke-opacity: 0.8; stroke-width: 5"/>
    </g>
    <g id="patch_3">
     <path d="M 57.6 345.6 
 L 57.6 0 
-" style="fill: none; stroke: #000000; stroke-linejoin: miter; stroke-linecap: square"/>
+" style="fill: none; stroke: #000000; stroke-width: 2; stroke-linejoin: miter; stroke-linecap: square"/>
    </g>
    <g id="patch_4">
     <path d="M 403.2 345.6 
 L 403.2 0 
-" style="fill: none; stroke: #000000; stroke-linejoin: miter; stroke-linecap: square"/>
+" style="fill: none; stroke: #000000; stroke-width: 2; stroke-linejoin: miter; stroke-linecap: square"/>
    </g>
    <g id="patch_5">
     <path d="M 57.6 345.6 
 L 403.2 345.6 
-" style="fill: none; stroke: #000000; stroke-linejoin: miter; stroke-linecap: square"/>
+" style="fill: none; stroke: #000000; stroke-width: 2; stroke-linejoin: miter; stroke-linecap: square"/>
    </g>
    <g id="patch_6">
     <path d="M 57.6 0 
 L 403.2 0 
-" style="fill: none; stroke: #000000; stroke-linejoin: miter; stroke-linecap: square"/>
+" style="fill: none; stroke: #000000; stroke-width: 2; stroke-linejoin: miter; stroke-linecap: square"/>
    </g>
   </g>
  </g>
  <defs>
-  <clipPath id="pf730833e3b">
+  <clipPath id="p031bc82657">
    <rect x="57.6" y="0" width="345.6" height="345.6"/>
   </clipPath>
  </defs>

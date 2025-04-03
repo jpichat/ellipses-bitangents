@@ -6,7 +6,7 @@
   <rdf:RDF xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:cc="http://creativecommons.org/ns#" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#">
    <cc:Work>
     <dc:type rdf:resource="http://purl.org/dc/dcmitype/StillImage"/>
-    <dc:date>2025-04-02T11:48:05.715533</dc:date>
+    <dc:date>2025-04-03T14:57:49.425039</dc:date>
     <dc:format>image/svg+xml</dc:format>
     <dc:creator>
      <cc:Agent>
@@ -42,22 +42,22 @@ z
    <g id="line2d_1">
     <path d="M 178.611984 -1 
 L 235.623198 346.6 
-" clip-path="url(#p6e9d79b922)" style="fill: none; stroke: #ffa500; stroke-width: 3; stroke-linecap: square"/>
+" clip-path="url(#p7b8cbcd202)" style="fill: none; stroke: #ffa500; stroke-width: 5; stroke-linecap: square"/>
    </g>
    <g id="line2d_2">
     <path d="M 14.4 108.80765 
 L 446.4 269.098152 
-" clip-path="url(#p6e9d79b922)" style="fill: none; stroke: #ffa500; stroke-width: 3; stroke-linecap: square"/>
+" clip-path="url(#p7b8cbcd202)" style="fill: none; stroke: #ffa500; stroke-width: 5; stroke-linecap: square"/>
    </g>
    <g id="line2d_3">
     <path d="M 14.4 56.164221 
 L 319.392277 346.6 
-" clip-path="url(#p6e9d79b922)" style="fill: none; stroke: #ffa500; stroke-width: 3; stroke-linecap: square"/>
+" clip-path="url(#p7b8cbcd202)" style="fill: none; stroke: #ffa500; stroke-width: 5; stroke-linecap: square"/>
    </g>
    <g id="line2d_4">
     <path d="M 60.351971 -1 
 L 446.4 304.432306 
-" clip-path="url(#p6e9d79b922)" style="fill: none; stroke: #ffa500; stroke-width: 3; stroke-linecap: square"/>
+" clip-path="url(#p7b8cbcd202)" style="fill: none; stroke: #ffa500; stroke-width: 5; stroke-linecap: square"/>
    </g>
    <g id="QuadContourSet_1">
     <path d="M 276.716633 269.344178 
@@ -140,7 +140,7 @@ L 287.971142 269.897094
 L 280.179559 269.56586 
 L 276.716633 269.344178 
 L 276.716633 269.344178 
-" clip-path="url(#p6e9d79b922)" style="fill: none; stroke: #0000ff; stroke-opacity: 0.7; stroke-width: 3"/>
+" clip-path="url(#p7b8cbcd202)" style="fill: none; stroke: #0000ff; stroke-opacity: 0.8; stroke-width: 5"/>
    </g>
    <g id="QuadContourSet_2">
     <path d="M 135.602405 150.804834 
@@ -545,32 +545,32 @@ L 137.333868 150.949929
 L 136.468136 150.881551 
 L 135.602405 150.804834 
 z
-" clip-path="url(#p6e9d79b922)" style="fill: none; stroke: #0000ff; stroke-opacity: 0.7; stroke-width: 3"/>
+" clip-path="url(#p7b8cbcd202)" style="fill: none; stroke: #0000ff; stroke-opacity: 0.8; stroke-width: 5"/>
    </g>
    <g id="patch_3">
     <path d="M 57.6 345.6 
 L 57.6 0 
-" style="fill: none; stroke: #000000; stroke-linejoin: miter; stroke-linecap: square"/>
+" style="fill: none; stroke: #000000; stroke-width: 2; stroke-linejoin: miter; stroke-linecap: square"/>
    </g>
    <g id="patch_4">
     <path d="M 403.2 345.6 
 L 403.2 0 
-" style="fill: none; stroke: #000000; stroke-linejoin: miter; stroke-linecap: square"/>
+" style="fill: none; stroke: #000000; stroke-width: 2; stroke-linejoin: miter; stroke-linecap: square"/>
    </g>
    <g id="patch_5">
     <path d="M 57.6 345.6 
 L 403.2 345.6 
-" style="fill: none; stroke: #000000; stroke-linejoin: miter; stroke-linecap: square"/>
+" style="fill: none; stroke: #000000; stroke-width: 2; stroke-linejoin: miter; stroke-linecap: square"/>
    </g>
    <g id="patch_6">
     <path d="M 57.6 0 
 L 403.2 0 
-" style="fill: none; stroke: #000000; stroke-linejoin: miter; stroke-linecap: square"/>
+" style="fill: none; stroke: #000000; stroke-width: 2; stroke-linejoin: miter; stroke-linecap: square"/>
    </g>
   </g>
  </g>
  <defs>
-  <clipPath id="p6e9d79b922">
+  <clipPath id="p7b8cbcd202">
    <rect x="57.6" y="0" width="345.6" height="345.6"/>
   </clipPath>
  </defs>

@@ -1,2 +1,2 @@
-from .btan import Ellipse, BitangentFinder
-from .entities import QuadraticCoeffs, EllipseParams
+from .btan import BitangentFinder
+from .entities import Ellipse, Conic
