@@ -2,8 +2,9 @@
 Compute bitangents of 2 (intersecting or non-intersecting) ellipses.
 
 <p align="center">
-    <img src="img/fig1.svg" width="350" height="" />
-    <img src="img/fig2.svg" width="350" height="" />
+    <img src="img/fig1.svg" width="230" height="" />
+    <img src="img/fig2.svg" width="230" height="" />
+<img src="img/fig3.svg" width="230" height="" />
 </p>
 
 ---
